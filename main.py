@@ -1,5 +1,9 @@
 import os
+from dotenv import load_dotenv
+
 import google.generativeai as genai
+
+load_dotenv()
 
 genai.configure(api_key=os.environ["GEMINI_API_KEY"])
 
@@ -21,6 +25,6 @@ chat_session = model.start_chat(
   ]
 )
 
-response = chat_session.send_message("Me explique as diferenças entre os modelos Gemini 2.0 Flash Experimental e o Gemini 2.0 Flash Thinking Experimental")
+response = chat_session.send_message("Você conhece o AWS Glue Data Quality? Pode me explicar como funciona?")
 
 print(response.text)

@@ -20,7 +20,7 @@ def read_root(model_name: str = "gemini-2.0-flash-exp"):
     "top_p": 0.95,
     "top_k": 40,
     "max_output_tokens": 8192,
-    "response_mime_type": "text/plain",
+    "response_mime_type": "application/json",
   }
 
   instructions = """
@@ -55,8 +55,4 @@ def read_root(model_name: str = "gemini-2.0-flash-exp"):
 
   response = model.generate_content(prompt)
 
-  # Extract rules from the response text
-  rules_text = re.search(r'Rules = \[(.*?)\]', response.text, re.DOTALL).group(1)
-  rules_list = [rule.strip().strip("'") for rule in rules_text.split(',\n')]
-
-  return {"rules": rules_list}
+  return json.loads(response.text)

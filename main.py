@@ -54,5 +54,11 @@ def read_root(model_name: str = "gemini-2.0-flash-exp"):
   """
 
   response = model.generate_content(prompt)
+  response_json = json.loads(response.text)
 
-  return json.loads(response.text)
+  return {
+    "rules": response_json["Rules"],
+    "count_prompt_tokens": response.usage_metadata.prompt_token_count,
+    "count_response_tokens": response.usage_metadata.candidates_token_count,
+    "count_total_tokens": response.usage_metadata.total_token_count
+  }

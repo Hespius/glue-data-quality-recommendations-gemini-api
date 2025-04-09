@@ -8,7 +8,10 @@ class AttributeModel(BaseModel):
     length: int
 
 
-class RequestModel(BaseModel):
-    type: str
+class GeminiRequestModel(BaseModel):
     model: Optional[str] = None
+    attributes : List[AttributeModel]
+
+
+class ManualRequestModel(BaseModel):
     attributes : List[AttributeModel]

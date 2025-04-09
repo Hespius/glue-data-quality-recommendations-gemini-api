@@ -1,2 +1,2 @@
-from .request_model import RequestModel, AttributeModel
-from .response_model import ResponseModel
+from .request_model import GeminiRequestModel, ManualRequestModel, AttributeModel
+from .response_model import GeminiResponseModel, ManualResponseModel

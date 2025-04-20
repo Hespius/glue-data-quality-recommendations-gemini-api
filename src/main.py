@@ -53,12 +53,18 @@ def __build_manual_rules(attributes: List[AttributeModel]) -> List[str]:
     LIST_ACCEPTED_TYPES = ["BOOLEAN", "DATE", "TIMESTAMP", "INTEGER", "DOUBLE", "FLOAT", "LONG"]
 
     list_rules = []
+    primary_key_attributes = []
+
+    for attribute in attributes:
+      if attribute.primary_key:
+        primary_key_attributes.append(attribute.name.upper())
 
     for attribute in attributes:
         if attribute.type.upper() in LIST_ACCEPTED_TYPES:
             list_rules.append(f'ColumnDataType \"{attribute.name.upper()}\" = \"{attribute.type.upper()}\"')
+       
+    list_rules.append(f'IsPrimaryKey \"{" ".join(primary_key_attributes)}\"')
 
-        list_rules.append(f'ColumnLength \"{attribute.name.upper()}\" >= \"{attribute.length}\"')
 
     return list_rules
 

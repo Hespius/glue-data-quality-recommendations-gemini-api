@@ -5,7 +5,7 @@ from typing import Optional, List
 class AttributeModel(BaseModel):
     name: str
     type: str
-    length: int
+    primary_key: Optional[bool] = False
 
 
 class GeminiRequestModel(BaseModel):
